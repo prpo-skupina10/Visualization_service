@@ -39,6 +39,11 @@ def load_player(player_id: int) -> pd.DataFrame:
         return pd.read_sql(query, conn, params=(player_id,))
 
 def load_players_by_team_ids(team_ids: list[int]) -> pd.DataFrame:
+    if not team_ids:
+        query = "SELECT * FROM players"
+        with get_connection_to_players() as conn:
+            return pd.read_sql(query, conn, params=team_ids)
+    
     placeholders = ",".join(["%s"] * len(team_ids))
 
     query = f"""
