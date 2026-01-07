@@ -12,5 +12,5 @@ def standings_chart(league_id: int, season: int):
     return {
         "league_id": league_id,
         "season": season,
-        "chart": path
+        "chart_url": f"/api/charts/static/{path.split('/')[-1]}"
     }
