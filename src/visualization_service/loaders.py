@@ -37,6 +37,21 @@ def load_player(player_id: int) -> pd.DataFrame:
     with get_connection_to_players() as conn:
         query = "SELECT * FROM players WHERE id = %s"
         return pd.read_sql(query, conn, params=(player_id,))
+    
+def load_standings(league_id: int, season: int) -> pd.DataFrame:
+    with get_connection_to_leagues() as conn:
+        query = '''SELECT 
+        position,
+        team_name,
+        points,
+        played,
+        wins,
+        draws,
+        losses,
+        goals_for,
+        goals_against,
+        goal_difference FROM standings WHERE league_id = %s AND season = %s ORDER BY position'''
+        return pd.read_sql(query, conn, params=(league_id, season, ))
 
 def load_players_by_team_ids(team_ids: list[int]) -> pd.DataFrame:
     if not team_ids:

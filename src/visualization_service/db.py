@@ -21,11 +21,11 @@ def get_connection_to_teams():
 
 def get_connection_to_leagues():
     return psycopg2.connect(
-        host="localhost",
+        host=os.getenv("LEAGUE_DB_HOST"),
         port=5432,
-        dbname="league_service",
-        user="postgres",
-        password="Kobe,Bryant123"
+        dbname=os.getenv("LEAGUE_DB_NAME"),
+        user=os.getenv("LEAGUE_DB_USER"),
+        password=os.getenv("LEAGUE_DB_PASSWORD"),
     )
 
 def close_connection(conn):
