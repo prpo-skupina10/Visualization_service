@@ -10,5 +10,5 @@ def players_by_position_chart(team_id: int):
     path = players_by_position(df)
     return {
         "team_id": team_id,
-        "chart": path
+        "chart_url": f"/api/charts/static/{path.split('/')[-1]}"
     }

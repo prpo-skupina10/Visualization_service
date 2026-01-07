@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from visualization_service.api.players import router as players_router
 
-app = FastAPI(title="Sportly Visualization Service")
+app = FastAPI(title="Sportly Visualization Service", root_path="/api/charts")
 
 app.include_router(players_router, prefix="/charts")
 
